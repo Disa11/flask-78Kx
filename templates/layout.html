@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flack</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+    <link rel="stylesheet" href="/static/css/modal.css">
+    
+    <style>
+        body {
+            background: #eee;
+        }
+    </style>
+    
+    <link rel="stylesheet" href="/static/css/navbar.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/chat.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body translate="no" class="hidden">
+    
+    <!-- Login y register -->
+    <div class="R_L_container" id="lr-content" style="height: 100%; width: 100%">
+
+        <div class="wrapper">
+            <h1 id="h1-l-r">Log In</h1>
+            <form action="" id="login-form">
+
+                <div class="input-box input-login ">
+                    <input type="text" placeholder="Username" id="username"
+                        pattern="^[^&quot;,&#x2F;,&#x21;,&#x2B;,&#x2D;,&#x27;,&#x40;,&#x5D;,&#x26;,&#x3A;,&#x5C;]*$"
+                        name="username">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <div class="input-box input-login ">
+                    <input type="password" placeholder="Password" id="password">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <button type="button" class="btn input-login" id="login-form-btn">Log In</button>
+            </form>
+
+            <form id="register-form" action="">
+
+                <div class="input-box input-register hidden-2">
+                    <input type="text" placeholder="Username" id="username-r"
+                        pattern="^[^&quot;,&#x2F;,&#x21;,&#x2B;,&#x2D;,&#x27;,&#x40;,&#x5D;,&#x26;,&#x3A;,&#x5C;]*$">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <div class="input-box input-register hidden-2">
+                    <input type="password" placeholder="Password" id="password-r">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+
+                <div class="input-box input-register hidden-2">
+                    <input type="password" placeholder="Confirm Password" id="confirm_password">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+
+                <button type="button" class="btn input-register hidden-2" id="register-form-btn">Register</button>
+                <div class="register-link">
+                    <p id="have-acount">Don't have accounts?</p> <a id='login-to-register'>Register</a>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="main-container d-flex tagvisibility hide-contt">
+        <div class="sidebar active" id="side_nav">
+            <div class="header-box px-2 pt-3 pb-4 d-flex justify-content-between">
+                <h1 class="fs-4"><span class="bg-white text-dark rounded shadow px-2 me-2">Disa</span> <span
+                        class="text-white">Flack</span></h1>
+                <button class="btn d-md-none d-block close-btn px-1 py-0 text-white"><i
+                        class="fal fa-stream"></i></button>
+            </div>
+
+            <ul class="list-unstyled px-2">
+                <li class="active"><a href="#" class="text-decoration-none px-3 py-2 d-block" id="nav__create_room"><i
+                            class="fal fa-home"></i> Create Room</a></li>
+                <h6 class="text-decoration-none px-3 py-2 d-block text-center text-white"><span><i
+                            class="fal fa-users"></i></span> Rooms</h6>
+
+                <ul class="list-unstyled chat-list" id="list-room">
+                
+                    
+                </ul>
+
+            </ul>
+
+
+            <hr class="h-color mx-2">
+
+            <ul class="list-unstyled px-2">
+                <li class=""><a href="" class="text-decoration-none px-3 py-2 d-block" id="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        Log out</a></li>
+
+                <h6 class="text-decoration-none px-3 py-2 d-block text-center text-white"><span><i
+                            class="fal fa-users"></i></span> Active Users</h6>
+
+                <ul class="list-unstyled" id="user-list">
+                
+                    
+                </ul>
+            </ul>
+        </div>
+        <div class="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <div class="d-flex justify-content-between d-md-none d-block">
+                        <button class="btn px-1 py-0 open-btn me-2"><i class="fal fa-stream"></i></button>
+                        <a class="navbar-brand fs-4" href="#"><span
+                                class="bg-dark rounded px-2 py-0 text-white">Disa</span></a>
+                    </div>
+                    <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fal fa-bars"></i>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                        <ul class="navbar-nav mb-2 mb-lg-0">
+                            <li class="nav-item text-black">
+                                <a class="nav-link active" aria-current="page" href="#" id="profile"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Contenido -->
+            <div class="dashboard-content px-3 pt-4">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+    </div>
+    <script>
+        $(".sidebar ul li").on('click', function () {
+            $(".sidebar ul li.active").removeClass('active');
+            $(this).addClass('active');
+        });
+
+        $('.open-btn').on('click', function () {
+            $('.sidebar').addClass('active');
+        });
+
+        $('.close-btn').on('click', function () {
+            $('.sidebar').removeClass('active');
+        });
+        $(".chat-list li").on('click', function (event) {
+            event.preventDefault(); // Prevenir la propagación del evento de clic
+            $(".chat-list li.active").removeClass('active');
+            $(this).addClass('active');
+        });
+    </script>
+    <script src="{{ url_for('static', filename='socket.io.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='index.js')}}"></script>
+</body>
+
+</html>

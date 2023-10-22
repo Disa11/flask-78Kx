@@ -1,0 +1,48 @@
+.chat-div {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column; /* Asegura que las burbujas de chat estén en una columna */
+    align-items: flex-start; /* Alinea las burbujas de chat a la izquierda */
+    margin: 0;
+    width: 100% !important;
+    height: 90%;
+}
+
+.chat-container {
+    width: 100%;
+    padding: 2%;
+    height: 100%;
+}
+
+.message-bubble {
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    text-align: center; /* Alinea el texto en el centro de las burbujas de chat */
+}
+
+.sent {
+    background-color: #000000;
+    align-self: flex-end;
+    color: #ffffff;
+    margin-left: auto; /* Alinea la burbuja enviada a la derecha */
+}
+
+.received {
+    background-color: #ffffff;
+    align-self: flex-start;
+    color: #000;
+    margin-right: auto; /* Alinea la burbuja recibida a la izquierda */
+}
+
+@media (max-width: 768px) {
+    .message-bubble {
+        max-width: 90%;
+    }
+
+    .chat-container {
+        padding: 20px;
+    }
+}

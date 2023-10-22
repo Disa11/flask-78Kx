@@ -1,0 +1,101 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Log In
+{% endblock %}
+
+{% block body %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<h2 class="fs-5" id="chat-title">Chat tittle</h2>
+
+<link rel="stylesheet" href="/static/css/bubble.css">
+
+<style>
+    #chat-msg-actv {
+        max-height: 400px; 
+        overflow-y: auto; 
+        padding: 10px; 
+    }
+</style>
+
+<div class="chat-container">
+    <div class="contt chat-div" id="chat-msg-actv">
+        
+    </div>
+
+    <form class="chat-window" id="chat-form">
+        <input class="chat-window-message" name="chat-window-message" type="text" autocomplete="off" autofocus
+        id="chat-input" />
+        <button type="submit">Send</button>
+    </form>
+</div>
+
+
+<!-- Modal para crear rooms -->
+<section class="modal">
+    <div class="modal__container">
+        <img src="/static/imagenes/modal.svg" class="modal__img">
+        <h2 class="modal__title">¡Create a new Room!</h2>
+
+        <div class="new-chat">
+            <div class="R_L_container">
+                <div class="wrapper" style="background-color: rgba(0, 0, 0, 0.652);">
+
+                    <div class="input-box">
+                        <input type="text" placeholder="Room name" id="create-input">
+                    </div>
+                    <button type="submit" class="btn" id="create-room-btn">Create</button>
+                </div>
+            </div>
+        </div>
+
+        <a href="" class="modal__close">Cerrar</a>
+    </div>
+</section>
+
+<script>
+    const OpenM = document.querySelector('#nav__create_room');
+    const modal = document.querySelector('.modal');
+    const closeModal = document.querySelector('.modal__close');
+
+    OpenM.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal.classList.add('modal--show');
+    });
+
+    closeModal.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal.classList.remove('modal--show');
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const socket = io();
+
+        function createRoom() {
+            const room = document.querySelector("#create-input").value;
+            console.log(room);
+            socket.emit('create', room, (res) => {
+                addRoom(res);
+            });
+        }
+
+        let create = document.querySelector("#create-room-btn");
+        create.addEventListener('click', function () {
+            console.log("create");
+            createRoom();
+        });
+
+        socket.on('status', (data) => {
+            if (data["msg"] === "Room already exists") {
+                alert("Room already exists");
+            }
+            else {
+                alert("create!");
+                modal.classList.remove('modal--show');
+            }
+        });
+    });
+</script>
+
+{% endblock %}
